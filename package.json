@@ -1,7 +1,7 @@
 {
-  "name": "binary-upload-boom",
+  "name": "study",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": "Study With Friends!",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",

@@ -23,8 +23,10 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);                /**finds the post */
-      const comments = await Comment.find({post: req.params.id }).sort({ createdAt: "desc" }).lean();/**finds the comemnts for the post and sorts decending by date */
-      res.render("post.ejs", { post: post, user: req.user, comments: comments }); /**renders in the EJS */
+                        /*** Comment.find is pulling from the comment model */
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc" }).populate('user').lean();/**finds the comemnts for the post and sorts decending by date */
+      const createdBy = req.user.userName
+      res.render("post.ejs", { post: post, user: req.user, comments: comments, createdBy: createdBy}); /**renders in the EJS */
       
     } catch (err) {
       console.log(err);
@@ -33,7 +35,7 @@ module.exports = {
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      const result = await cloudinary.uploader.upload(req.file.path, {folder:"samples"});
 
       await Post.create({
         title: req.body.title,

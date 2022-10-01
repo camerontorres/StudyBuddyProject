@@ -3,6 +3,18 @@
   <div class="row mt-5">
       <div class="col-6">
           <div>
+            <div class="mb-3">
+              <form action="/profPic/NewProfPic" method="POST" enctype="multipart/form-data"  >
+              <label for="imgUpload" class="form-label">Image</label>
+              <input type="file" class="form-control" id="imageUpload" name="file">
+            
+            <img class="img-fluid" src="<%= user.profPic%>">
+            <div>
+                <button type="submit" class="btn btn-primary" value="Upload">Add a profile picture!</button> 
+            </div>
+            </form>
+            
+     
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
